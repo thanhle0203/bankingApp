@@ -19,7 +19,9 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 //import com.thanhle.domain.User;
 
@@ -66,6 +68,15 @@ public class AppConfig {
 		jpaProerties.setProperty("hibernate.show_sql", "true");
 		jpaProerties.setProperty("hibernate.hbm2ddl.auto", "update");
 		return jpaProerties;
+	}
+	
+	@Bean
+	public ViewResolver viewResolver() {
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setPrefix("/WEB-INF/jsp/");
+		viewResolver.setSuffix(".jsp");
+		viewResolver.setViewClass(JstlView.class);
+		return viewResolver;
 	}
 	
 }

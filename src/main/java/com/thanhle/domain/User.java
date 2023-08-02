@@ -3,10 +3,15 @@ package com.thanhle.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.*;
+
 import jakarta.persistence.*;
 
 import lombok.*;
 
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "userId")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -26,6 +31,7 @@ public class User {
 			inverseJoinColumns=@JoinColumn(name="role_id")
 			)
 	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	//@JsonManagedReference
 	private List<Role> roles = new ArrayList<>();
 
 }

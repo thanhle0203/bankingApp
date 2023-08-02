@@ -1,7 +1,7 @@
 package com.thanhle.domain;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,6 +34,9 @@ public class Account {
 	@JoinColumn(name="customerId")
 	@ManyToOne
 	private Customer accountCustomer;
+	
+	@OneToMany(mappedBy = "account")
+	private List<BankTransaction> transactions = new ArrayList();
 	
 	
 

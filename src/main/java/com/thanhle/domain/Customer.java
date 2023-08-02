@@ -2,13 +2,14 @@ package com.thanhle.domain;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
-
 import lombok.*;
 
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "customerId")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -34,11 +35,14 @@ public class Customer {
 	private String realId;
 	
 	@OneToMany(mappedBy="accountCustomer")
+	@JsonBackReference
 	private List<Account> customerAccounts;
 	
 	@JoinColumn(name="userId")
 	@OneToOne
+	@JsonBackReference
 	private User user;
+
 	
 
 }

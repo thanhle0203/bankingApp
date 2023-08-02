@@ -1,10 +1,13 @@
 package com.thanhle.domain;
 
 import java.util.*;
-
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "roleId")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -18,5 +21,6 @@ public class Role {
 	private String roleName;
 	
 	@ManyToMany(mappedBy="roles")
+	//@JsonBackReference
 	private List<User> users = new ArrayList<>();
 }
