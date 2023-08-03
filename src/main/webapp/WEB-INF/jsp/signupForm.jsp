@@ -22,19 +22,19 @@
         <!-- Customer Information -->
         <div class="form-group">
             <label for="customerName">Customer Name:</label>
-            <input type="text" name="customer.customerName" class="form-control" required />
+            <input type="text" name="customerName" class="form-control" required />
         </div>
         <div class="form-group">
             <label for="customerGender">Gender:</label>
-            <input type="text" name="customer.customerGender" class="form-control" required />
+            <input type="text" name="customerGender" class="form-control" required />
         </div>
         <div class="form-group">
             <label for="customerDob">Date of Birth:</label>
-            <input type="date" name="customer.customerDob" class="form-control" required />
+            <input type="date" name="customerDob" class="form-control" required />
         </div>
         <div class="form-group">
             <label for="customerMobileNum">Mobile Number:</label>
-            <input type="text" name="customer.customerMobileNum" class="form-control" required />
+            <input type="text" name="customerMobileNum" class="form-control" required />
         </div>
         
 
@@ -66,7 +66,7 @@
 
         <div class="form-group">
             <label for="realId">Real ID:</label>
-            <input type="text" name="customer.realId" class="form-control" required />
+            <input type="text" name="realId" class="form-control" required />
         </div>
 
         <button type="submit" class="btn btn-primary">Sign Up</button>

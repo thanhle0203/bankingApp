@@ -39,7 +39,7 @@ public class Customer {
 	private List<Account> customerAccounts;
 	
 	@JoinColumn(name="userId")
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JsonBackReference
 	private User user;
 

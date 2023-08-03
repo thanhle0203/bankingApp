@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.thanhle.DTO.SignupForm;
 import com.thanhle.domain.Address;
 import com.thanhle.domain.Customer;
 import com.thanhle.domain.Role;
@@ -71,22 +72,33 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String handleSignup(User user, Customer customer, Address address) {
+	public String handleSignup(@ModelAttribute SignupForm form) {
 	    Role defaultRole = roleService.findByRoleName("User");
 	    if (defaultRole == null) {
-	    	// Log the error
-	    	System.out.println("User role not found in database");
+	        // Log the error
+	        System.out.println("User role not found in database");
 	    }
 
+	    User user = new User();
+	    user.setUserName(form.getUserName());
+	    user.setPassword(form.getPassword());
 	    user.setRoles(Collections.singletonList(defaultRole));
-	    User savedUser = userService.saveUser(user);
-	    
-	    customer.setUser(savedUser);
-	    customer.setCustomerAddress(address);
+
+	    Customer customer = new Customer();
+	    customer.setCustomerName(form.getCustomerName());
+	    customer.setCustomerGender(form.getCustomerGender());
+	    customer.setCustomerDob(form.getCustomerDob());
+	    customer.setCustomerMobileNum(form.getCustomerMobileNum());
+	    customer.setCustomerAddress(form.getCustomerAddress());
+	    customer.setRealId(form.getRealId());
+	    customer.setUser(user);
+
+	    userService.saveUser(user);
 	    customerService.saveCustomer(customer);
-	   
+
 	    return "redirect:/login";
 	}
+
 
 	
 }

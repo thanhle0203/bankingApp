@@ -5,10 +5,16 @@ import java.util.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.*;
 
 import lombok.*;
-
+//@JsonIdentityInfo(
+		  //generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  //property = "accountId")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -28,7 +34,8 @@ public class Account {
 	private double accountBalance;
 	
 	@JoinColumn(name="branchId")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
 	private Branch accountBranch;
 	
 	@JoinColumn(name="customerId")
