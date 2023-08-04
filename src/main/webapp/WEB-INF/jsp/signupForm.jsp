@@ -1,77 +1,56 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign Up</title>
+    <meta charset="UTF-8">
+    <title>User Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
-    <h1 class="text-center">Sign Up</h1>
-    <form action="signup" method="post">
-        <!-- User Information -->
-        <div class="form-group">
-            <label for="userName">Username:</label>
-            <input type="text" name="userName" class="form-control" required />
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" name="password" class="form-control" required />
-        </div>
-        
-        <!-- Customer Information -->
-        <div class="form-group">
-            <label for="customerName">Customer Name:</label>
-            <input type="text" name="customerName" class="form-control" required />
-        </div>
-        <div class="form-group">
-            <label for="customerGender">Gender:</label>
-            <input type="text" name="customerGender" class="form-control" required />
-        </div>
-        <div class="form-group">
-            <label for="customerDob">Date of Birth:</label>
-            <input type="date" name="customerDob" class="form-control" required />
-        </div>
-        <div class="form-group">
-            <label for="customerMobileNum">Mobile Number:</label>
-            <input type="text" name="customerMobileNum" class="form-control" required />
-        </div>
-        
+    <div class="container">
+        <h1>Create a New User</h1>
+        <form action="/users/save" method="post">
+            <div class="form-group">
+                <label for="userName">User Name:</label>
+                <input type="text" name="userName" id="userName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Role:</label><br>
+                <input type="radio" id="admin" name="role" value="ADMIN">
+                <label for="admin">Admin</label><br>
+                <input type="radio" id="user" name="role" value="USER">
+                <label for="user">User</label>
+            </div>
+            <input type="submit" value="Create User" class="btn btn-primary">
+        </form>
 
-        <!-- Address Fields -->
-        <div class="form-group">
-            <label for="customerAddress.addressLine1">Address Line 1:</label>
-            <input type="text" name="customer.customerAddress.addressLine1" class="form-control" required />
-        </div>
-        <div class="form-group">
-            <label for="customerAddress.addressLine2">Address Line 2:</label>
-            <input type="text" name="customer.customerAddress.addressLine2" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label for="customerAddress.city">City:</label>
-            <input type="text" name="customer.customerAddress.city" class="form-control" required />
-        </div>
-        <div class="form-group">
-            <label for="customerAddress.state">State:</label>
-            <input type="text" name="customer.customerAddress.state" class="form-control" required />
-        </div>
-        <div class="form-group">
-            <label for="customerAddress.county">County:</label>
-            <input type="text" name="customer.customerAddress.county" class="form-control" required />
-        </div>
-        <div class="form-group">
-            <label for="customerAddress.zipCode">Zip Code:</label>
-            <input type="text" name="customer.customerAddress.zipCode" class="form-control" required />
-        </div>
-
-        <div class="form-group">
-            <label for="realId">Real ID:</label>
-            <input type="text" name="realId" class="form-control" required />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
-    <a href="login" class="btn btn-link">Login</a>
-</div>
+        <h2>All Users</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Roles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${users}" var="user">
+                    <tr>
+                        <td>${user.userId}</td>
+                        <td>${user.userName}</td>
+                        <td>
+                            <c:forEach items="${user.roles}" var="role">
+                                ${role.roleName}<br>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

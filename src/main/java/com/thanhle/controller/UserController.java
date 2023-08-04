@@ -10,17 +10,22 @@ import org.springframework.web.bind.annotation.*;
 
 import com.thanhle.DTO.SignupForm;
 import com.thanhle.domain.Address;
+import com.thanhle.domain.Branch;
 import com.thanhle.domain.Customer;
 import com.thanhle.domain.Role;
 import com.thanhle.domain.User;
+import com.thanhle.repository.UserRepository;
 import com.thanhle.service.CustomerService;
 import com.thanhle.service.RoleService;
 import com.thanhle.service.UserService;
 
 //@RestController
 @Controller
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
+	@Autowired
+	private UserRepository userRepository;
+	
 	@Autowired
 	private UserService userService;
 	
@@ -30,10 +35,7 @@ public class UserController {
 	@Autowired
 	private RoleService roleService;
 	
-	@PostMapping
-	public User createUser(@RequestBody User user) {
-		return userService.saveUser(user);
-	}
+
 	
 	@GetMapping
 	public List<User> getAllUsers() {
@@ -71,33 +73,27 @@ public class UserController {
 		return "signupForm";
 	}
 	
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String handleSignup(@ModelAttribute SignupForm form) {
-	    Role defaultRole = roleService.findByRoleName("User");
-	    if (defaultRole == null) {
-	        // Log the error
-	        System.out.println("User role not found in database");
-	    }
-
-	    User user = new User();
-	    user.setUserName(form.getUserName());
-	    user.setPassword(form.getPassword());
-	    user.setRoles(Collections.singletonList(defaultRole));
-
-	    Customer customer = new Customer();
-	    customer.setCustomerName(form.getCustomerName());
-	    customer.setCustomerGender(form.getCustomerGender());
-	    customer.setCustomerDob(form.getCustomerDob());
-	    customer.setCustomerMobileNum(form.getCustomerMobileNum());
-	    customer.setCustomerAddress(form.getCustomerAddress());
-	    customer.setRealId(form.getRealId());
-	    customer.setUser(user);
-
-	    userService.saveUser(user);
-	    customerService.saveCustomer(customer);
-
-	    return "redirect:/login";
+	/*
+	@PostMapping("/save")
+	  public String saveUser(User user, Model model) {
+	        userService.saveUser(user);
+	        model.addAttribute("message", "User saved successfully");
+	        model.addAttribute("users", userRepository.findAll());
+	        return "signupForm";
+	          
 	}
+	*/
+	
+	@PostMapping("/save")
+	public String saveUser(User user, @RequestParam String role, Model model) {
+	    userService.saveUser(user, role);
+
+	    model.addAttribute("message", "User saved successfully");
+	    model.addAttribute("users", userService.getAllUsers());
+	    return "signupForm";
+	}
+
+	
 
 
 	

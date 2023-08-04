@@ -1,6 +1,7 @@
 package com.thanhle.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,11 @@ public class UserServiceImpl implements UserService{
 	@Autowired RoleRepository roleRepository;
 
 	@Override
-	public User saveUser(User user) {
+	public User saveUser(User user, String role) {
+		Role selectedRole = roleRepository.findById(role.equals("ADMIN") ? 1L : 2L)
+			.orElseThrow(() -> new IllegalArgumentException("Invalid role selected: " + role));
+		user.setRoles(Collections.singletonList(selectedRole));
+		
 		if (user.getUserId() != null && userRepository.existsById(user.getUserId())) {
 			throw new IllegalArgumentException("User ID already exists");
 		}
