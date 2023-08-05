@@ -1,6 +1,7 @@
 package com.thanhle.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,6 +73,17 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> getAllCustomers() {
 		return customerRepository.findAll();
+	}
+
+	@Override
+	public Customer findById(Long customerId) {
+		Optional<Customer> existingCustomer = customerRepository.findById(customerId);
+		if (existingCustomer.isPresent()) {
+			return existingCustomer.get();
+		}
+		else {
+			return null;
+		}
 	}
 	
 	

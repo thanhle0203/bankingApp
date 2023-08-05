@@ -9,13 +9,7 @@
 <body>
     <div class="container">
         <h1>Create a New Branch</h1>
-        <!-- <form action="/branches/save" method="post"> -->
-        <form action="<c:url value='/branches/save'/>" method="post">
-
-            <div class="form-group">
-                <label for="branchId">Branch ID:</label>
-                <input type="text" name="branchId" id="branchId" class="form-control" required>
-            </div>
+        <form action="/branches/save" method="post">
 
             <div class="form-group">
                 <label for="branchName">Branch Name:</label>

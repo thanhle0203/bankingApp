@@ -18,10 +18,7 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
 
     @Override
-    public Account createAccount(AccountType type, double balance) {
-        Account account = new Account();
-        account.setAccountType(type);
-        account.setAccountBalance(balance);
+    public Account createAccount(Account account) {
         return accountRepository.save(account);
     }
 

@@ -27,7 +27,7 @@
             </div>
             <input type="submit" value="Create User" class="btn btn-primary">
         </form>
-
+        <br>
         <h2>All Users</h2>
         <table class="table">
             <thead>

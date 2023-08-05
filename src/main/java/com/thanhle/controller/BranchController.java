@@ -21,10 +21,10 @@ public class BranchController {
     @Autowired
     private BranchService branchService;
 
-    @GetMapping("/create")
+    @GetMapping()
 	public String branchForm(Model model) {
     	//model.addAttribute("branch", new Branch());
-    	//model.addAttribute("branches", branchService.findAll());
+    	model.addAttribute("branches", branchService.findAll());
 		return "branchForm";
 	}
     

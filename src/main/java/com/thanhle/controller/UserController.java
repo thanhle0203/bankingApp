@@ -36,11 +36,12 @@ public class UserController {
 	private RoleService roleService;
 	
 
-	
+	/*
 	@GetMapping
 	public List<User> getAllUsers() {
 		return userService.getAllUsers();
 	}
+	*/
 	
 	@GetMapping("/{userId}")
 	public User getUserById(@PathVariable Long userId) {
@@ -93,7 +94,11 @@ public class UserController {
 	    return "signupForm";
 	}
 
-	
+	@GetMapping
+	public String saveUser(User user, Model model) {
+	    model.addAttribute("users", userService.getAllUsers());
+	    return "signupForm";
+	}
 
 
 	
