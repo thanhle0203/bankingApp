@@ -12,6 +12,14 @@
         <form action="/accounts/save/${customer.customerId}" method="post">
             <input type="hidden" name="customerId" value="${customer.customerId}" />
             <div class="form-group">
+                <label>Customer ID:</label>
+                <p>${customer.customerId}</p>
+            </div>
+            <div>
+                <label>Customer Name:</label>
+                <p>${customer.customerName}</p>
+            </div>
+            <div class="form-group">
                 <label for="accountType">Account Type:</label>
                 <select id="accountType" name="accountType" class="form-control">
                     <option value="SAVING">Saving Account</option>
@@ -38,13 +46,17 @@
         <h2>All Accounts</h2>
         <table class="table table-bordered">
             <tr>
-                <th>ID</th>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th>Account ID</th>
                 <th>Type</th>
                 <th>Date of Opening</th>
                 <th>Balance</th>
             </tr>
             <c:forEach var="account" items="${accounts}">
                 <tr>
+                    <td>${account.accountCustomer.customerId}</td>
+                    <td>${account.accountCustomer.customerName}</td>
                     <td>${account.accountId}</td>
                     <td>${account.accountType}</td>
                     <td>${account.accountDateOpen}</td>

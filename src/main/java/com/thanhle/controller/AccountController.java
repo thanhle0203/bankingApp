@@ -55,6 +55,13 @@ public class AccountController {
 	    return "accountForm";
 	}
 	
+	
+	@GetMapping("/create")
+	public String createAccountForm(Model model) {
+	    model.addAttribute("accounts", accountService.findAllAccounts());
+	    return "accountForm";
+	}
+	
 
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
