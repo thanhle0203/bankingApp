@@ -16,9 +16,22 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+    
+    @Override
+    public List<Account> findAccountsByCustomerId(Long customerId) {
+    	return accountRepository.findAccountsByCustomerId(customerId);
+    }
+    
+
 
     @Override
     public Account createAccount(Account account) {
+    	List<Account> customerAccounts = findAccountsByCustomerId(account.getAccountCustomer().getCustomerId());
+    	for (Account existingAccount : customerAccounts) {
+    		if (existingAccount.getAccountType().equals(account.getAccountType())) {
+    			throw new IllegalArgumentException("Customer already has an account of type: " + account.getAccountType());
+    		}
+    	}
         return accountRepository.save(account);
     }
 

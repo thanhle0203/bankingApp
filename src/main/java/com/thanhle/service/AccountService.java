@@ -14,5 +14,6 @@ public interface AccountService {
     List<Account> findByAccountType(AccountType type);
     // Additional methods based on the requirements
 	Account createAccount(Account account);
+	List<Account> findAccountsByCustomerId(Long customerId);
 }
 
