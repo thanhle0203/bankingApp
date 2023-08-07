@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thanhle.domain.Account;
 import com.thanhle.domain.BankTransaction;
 import com.thanhle.domain.TransactionType;
 import com.thanhle.repository.BankTransactionRepository;
@@ -17,35 +18,40 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	private BankTransactionRepository bankTransactionRepository;
 
 	@Override
-	public BankTransaction findById(Long id) {
+	public BankTransaction createTransaction(BankTransaction transaction) {
+		Account fromAccount = transaction.getBankTransactionFromAccount();
+		return bankTransactionRepository.save(transaction);
+	}
 	
-		return bankTransactionRepository.findById(id).orElse(null);
+	@Override
+	public BankTransaction findTransactionById(Long transactionId) {
+		return bankTransactionRepository.findById(transactionId).orElse(null);
 	}
 
 	@Override
-	@Transactional
-	public List<BankTransaction> findAll() {
+	public List<BankTransaction> findAllTransactions() {
 		return bankTransactionRepository.findAll();
 	}
 
-	@Override
-	@Transactional
-	public BankTransaction save(BankTransaction transaction) {
 	
-		return bankTransactionRepository.save(transaction);
-	}
 
 	@Override
-	@Transactional
-	public void delete(Long id) {
-		bankTransactionRepository.deleteById(id);
+	public void deleteTransaction(Long transactionId) {
+		bankTransactionRepository.deleteById(transactionId);
 		
 	}
 
 	@Override
-	@Transactional
-	public List<BankTransaction> findByType(TransactionType type) {
-		return bankTransactionRepository.findByTransactionType(type);
+	public BankTransaction updateTransaction(BankTransaction transaction) {
+		return bankTransactionRepository.save(transaction);
 	}
+
+	@Override
+	public List<BankTransaction> findTransactionsByAccountId(Long accountId) {
+	
+		return bankTransactionRepository.findTransactionsByAccountId(accountId);
+	}
+
+	
 
 }

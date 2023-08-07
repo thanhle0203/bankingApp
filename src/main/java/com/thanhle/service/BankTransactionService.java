@@ -6,10 +6,11 @@ import com.thanhle.domain.BankTransaction;
 import com.thanhle.domain.TransactionType;
 
 public interface BankTransactionService {
-	BankTransaction findById(Long id);
-	List<BankTransaction> findAll();
-	BankTransaction save(BankTransaction transaction);
-	void delete(Long id);
-	List<BankTransaction> findByType(TransactionType type);
+	BankTransaction findTransactionById(Long transactionId);
+	List<BankTransaction> findAllTransactions();
+	BankTransaction createTransaction(BankTransaction transaction);
+	void deleteTransaction(Long transactionId);
+	BankTransaction updateTransaction(BankTransaction transaction);
+	List<BankTransaction> findTransactionsByAccountId(Long accountId);
 
 }

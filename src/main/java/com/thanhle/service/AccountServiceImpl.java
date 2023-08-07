@@ -21,9 +21,8 @@ public class AccountServiceImpl implements AccountService {
     public List<Account> findAccountsByCustomerId(Long customerId) {
     	return accountRepository.findAccountsByCustomerId(customerId);
     }
+ 
     
-
-
     @Override
     public Account createAccount(Account account) {
     	List<Account> customerAccounts = findAccountsByCustomerId(account.getAccountCustomer().getCustomerId());
@@ -32,6 +31,11 @@ public class AccountServiceImpl implements AccountService {
     			throw new IllegalArgumentException("Customer already has an account of type: " + account.getAccountType());
     		}
     	}
+    	
+    	if (account.getAccountBalance() <= 0) {
+			throw new IllegalArgumentException("Account balance must be greater than 0");
+		}
+    	
         return accountRepository.save(account);
     }
 
