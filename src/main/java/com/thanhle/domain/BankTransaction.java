@@ -45,6 +45,8 @@ public class BankTransaction {
 	
 	
 	private String comments;
+
+
 	
 	
 	

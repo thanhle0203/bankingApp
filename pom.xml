@@ -54,6 +54,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -130,6 +131,15 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		
+		<resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+      <!-- Specify additional resource directories here -->
+    </resources>
+    
 	</build>
 
 </project>

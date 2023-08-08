@@ -11,8 +11,6 @@ import com.thanhle.domain.TransactionType;
 @Repository
 public interface BankTransactionRepository extends JpaRepository<BankTransaction, Long>  {
 
-	List<BankTransaction> findByTransactionType(TransactionType type);
-
-	List<BankTransaction> findTransactionsByAccountId(Long accountId);
+	List<BankTransaction> findByAccountAccountId(Long accountId);
 
 }

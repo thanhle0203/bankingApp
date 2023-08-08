@@ -44,7 +44,8 @@ public class Account {
 	
 	@OneToMany(mappedBy = "account")
 	private List<BankTransaction> transactions = new ArrayList();
-	
+
+
 	
 
 }

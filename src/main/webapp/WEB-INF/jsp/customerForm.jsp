@@ -17,8 +17,8 @@
             <div class="form-group">
                 <label for="customerGender">Gender:</label>
                 <input type="text" name="customerGender" id="customerGender" class="form-control" required>
-            <!-- </div>
-            <div class="form-group"> -->
+            </div>
+            <div class="form-group">
                 <label for="customerDob">Date of Birth:</label>
                 <input type="date" name="customerDob" id="customerDob" class="form-control" required>
             </div>

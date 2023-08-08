@@ -8,9 +8,13 @@ import com.thanhle.domain.TransactionType;
 public interface BankTransactionService {
 	BankTransaction findTransactionById(Long transactionId);
 	List<BankTransaction> findAllTransactions();
-	BankTransaction createTransaction(BankTransaction transaction);
+	//BankTransaction createTransaction(BankTransaction transaction);
 	void deleteTransaction(Long transactionId);
 	BankTransaction updateTransaction(BankTransaction transaction);
 	List<BankTransaction> findTransactionsByAccountId(Long accountId);
 
+	BankTransaction createTransaction(Long fromAccountId, Long toAccountId, double amount,
+			TransactionType transactionType);
+	
+	
 }
