@@ -27,7 +27,7 @@ public class BankTransactionController {
 	@Autowired
 	private BankTransactionService bankTransactionService;
 	
-	@GetMapping("/transaction")
+	@GetMapping("/transactions")
 	public String showTransactionForm(Model model) {
 		model.addAttribute("transaction", new BankTransaction());
 		model.addAttribute("transactions", bankTransactionService.findAllTransactions());

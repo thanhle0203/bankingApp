@@ -35,12 +35,12 @@ public class AccountController {
 		}
 		
 	    account.setAccountCustomer(customer);
-		accountService.createAccount(account);
+	    Account createdAccount = accountService.createAccount(account);
 		
 		model.addAttribute("customer", customer);
 	    model.addAttribute("account", "Account saved successfully");
 	    model.addAttribute("accounts", accountService.findAllAccounts());
-	    return "redirect:/someSuccessPage";
+	    return "redirect:/bankTransactions/transaction/" + createdAccount.getAccountId();
 	}
 
 	@GetMapping("/create/{customerId}")
