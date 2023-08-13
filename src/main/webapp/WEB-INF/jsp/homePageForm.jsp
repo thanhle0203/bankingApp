@@ -18,11 +18,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/customers">Customer</a>
+                </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Account</a>
+                    <a class="nav-link" href="/accounts">Account</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Transaction</a>
+                    <a class="nav-link" href="/transactions">Transaction</a>
                 </li>
             </ul>
         </div>
@@ -32,9 +35,15 @@
     <div class="mt-5">
         <h3>Login</h3>
         <form action="loginEndpoint" method="post">
-            <div class="form-group">
+            <!-- Hidden roleId input -->
+            <input type="hidden" name="roleId" value="2">
+            <!-- <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" id="email" name="email" required>
+            </div> -->
+            <div>
+                <label for="userName">Username</label>
+                <input type="text" class="form-control" id="userName" name="userName" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
@@ -46,7 +55,7 @@
 
     <!-- Signup Component -->
     <div class="mt-5">
-        <h4>New to BankingApp? <a href="signupPage.jsp">Sign Up Now</a></h4>
+        <h4>New to BankingApp? <a href="/users/signup">Sign Up Now</a></h4>
     </div>
 </div>
 
