@@ -46,7 +46,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 		}
 		
 		// Deducting from "fromAccount" balance for widthrawal
-		if (transactionType == TransactionType.WITHDRAWL || transactionType == TransactionType.TRANSFER) {
+		if (transactionType == TransactionType.WITHDRAWAL || transactionType == TransactionType.TRANSFER) {
 			if (fromAccount == null) {
 				throw new IllegalArgumentException("From account not found");
 			}
@@ -104,7 +104,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Override
 	public List<BankTransaction> findTransactionsByAccountId(Long accountId) {
 	
-		return bankTransactionRepository.findByAccountAccountId(accountId);
+		return bankTransactionRepository.findByBankTransactionFromAccount_AccountId(accountId);
 	}
 
 	

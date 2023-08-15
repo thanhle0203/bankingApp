@@ -48,19 +48,49 @@ public class BankTransactionController {
 	
 	
 	@PostMapping("/transaction")
-	public String createTransaction(@RequestParam Long fromAccountId, @RequestParam Long toAccountId, @RequestParam double amount, TransactionType transactionType, RedirectAttributes redirectAttributes, Model model) {
+	public String createTransaction(@RequestParam Long fromAccountId, 
+									@RequestParam Long toAccountId, 
+									@RequestParam double amount, 
+									TransactionType transactionType, 
+									RedirectAttributes redirectAttributes, 
+									Model model) {
 	
 		
 		try {
-			BankTransaction savedTransaction = bankTransactionService.createTransaction(fromAccountId, toAccountId, amount, transactionType);
-			model.addAttribute("transactions", savedTransaction);
-			model.addAttribute("transactions", bankTransactionService.findAllTransactions());
 			
-			return "redirect:/transactions";
+			bankTransactionService.createTransaction(fromAccountId, toAccountId, amount, transactionType);
+			
+			// Fetch all transactions of the given accountId
+			if(!model.containsAttribute("transactions")) {
+			    List<BankTransaction> transactions = bankTransactionService.findTransactionsByAccountId(fromAccountId);
+			    model.addAttribute("transactions", transactions);
+			    System.out.println("Transactions 1" + transactions);
+			}
+
+			
+			return "redirect:/bankTransactions/account/" + fromAccountId;
 		} catch (IllegalArgumentException e) {
 			redirectAttributes.addFlashAttribute("error", e.getMessage());
 			return "redirect:/bankTransactions/transaction";
 		}
 	}
+	
+	@GetMapping("/account/{fromAccountId}")
+	public String getAllTransactionsFromAccount(@PathVariable Long fromAccountId, Model model) {
+	    // Fetch all transactions of the given accountId
+	    List<BankTransaction> transactions = bankTransactionService.findTransactionsByAccountId(fromAccountId);
+	    System.out.println("Transactions " + transactions);
+	    
+	    model.addAttribute("transactions", new BankTransaction());
+
+	    // Add the fetched transactions to the model
+	    model.addAttribute("transactions", transactions);
+
+	    // Return the appropriate view name
+	    return "bankTransactionForm";
+	}
+	
+
+
 
 }

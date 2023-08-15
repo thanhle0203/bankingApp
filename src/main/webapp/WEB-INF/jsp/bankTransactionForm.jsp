@@ -56,9 +56,10 @@
 					<tr>
 						<td>${transaction.bankTransactionId}</td>
 						<td>${transaction.bankTransactionFromAccount.accountId}</td>
+						<td>${transaction.bankTransactionToAccount.accountId}</td>
 						<td>${transaction.transactionAmount}</td>
 						<td>${transaction.transactionType}</td>
-						<td>${transaction.bankTransactionToAccount.accountId}</td>
+						
 					</tr>
 				</c:forEach>
 			</tbody>
