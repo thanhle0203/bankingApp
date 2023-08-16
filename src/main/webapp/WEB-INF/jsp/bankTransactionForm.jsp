@@ -13,7 +13,7 @@
 	<div class="container">
 		<h1 class="text-center my-3">Transaction Form for Account: ${account.accountId}</h1>
 		<form method="POST" action="/bankTransactions/transaction" class="mb-4">
-			<input type="hidden" name="fromAccountId" id="" value="${account.accountId}">
+			<!-- <input type="hidden" name="fromAccountId" id="" value="${account.accountId}"> -->
 			<div class="form-group">
 				<label for="fromAccountId">From Account ID</label>
 				<input type="text" id="fromAccountId" name="fromAccountId" class="form-control" value="${account.accountId}" readonly>

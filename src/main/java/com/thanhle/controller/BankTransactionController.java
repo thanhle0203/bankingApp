@@ -34,6 +34,7 @@ public class BankTransactionController {
 		return "bankTransactionForm";
 	}
 	
+	/*
 	@GetMapping("/transaction/{accountId}")
 	public String showTransactionForm(@PathVariable Long accountId, Model model) {
 		Account account = accountService.findAccountById(accountId);
@@ -45,6 +46,7 @@ public class BankTransactionController {
 		model.addAttribute("transaction", new BankTransaction());
 		return "bankTransactionForm";
 	}
+	*/
 	
 	
 	@PostMapping("/transaction")
@@ -68,11 +70,27 @@ public class BankTransactionController {
 			}
 
 			
-			return "redirect:/bankTransactions/account/" + fromAccountId;
+			//return "redirect:/bankTransactions/account/" + fromAccountId;
+			return "redirect:/bankTransactions/transaction/" + fromAccountId;
 		} catch (IllegalArgumentException e) {
 			redirectAttributes.addFlashAttribute("error", e.getMessage());
 			return "redirect:/bankTransactions/transaction";
 		}
+	}
+	
+	@GetMapping("/transaction/{fromAccountId}")
+	public String getAllTransactionsAccountId(@PathVariable Long fromAccountId, Model model) {
+	    // Fetch all transactions of the given accountId
+	    List<BankTransaction> transactions = bankTransactionService.findTransactionsByAccountId(fromAccountId);
+	    System.out.println("Transactions " + transactions);
+	    
+	    model.addAttribute("transactions", new BankTransaction());
+
+	    // Add the fetched transactions to the model
+	    model.addAttribute("transactions", transactions);
+
+	    // Return the appropriate view name
+	    return "bankTransactionForm";
 	}
 	
 	@GetMapping("/account/{fromAccountId}")
