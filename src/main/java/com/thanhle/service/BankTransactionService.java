@@ -13,7 +13,7 @@ public interface BankTransactionService {
 	BankTransaction updateTransaction(BankTransaction transaction);
 	List<BankTransaction> findTransactionsByAccountId(Long accountId);
 
-	BankTransaction createTransaction(Long fromAccountId, Long toAccountId, double amount,
+	BankTransaction createTransaction(Long fromAccountId, Long toAccountId, double amount, String comments,
 			TransactionType transactionType);
 	
 	

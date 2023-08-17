@@ -33,9 +33,19 @@
 			</div>
 
 			<div class="form-group">
+				<label for="comments">Comments</label>
+				<input type="text" id="comments" name="comments" class="form-control">
+			</div>
+
+			<div class="form-group">
 				<label for="toAccountId">To Account ID</label>
 				<input type="text" id="toAccountId" name="toAccountId" class="form-control">
 			</div>
+
+			<!-- <div class="form-group">
+				<label for="transactionDateTime">Transaction Date Time</label>
+				<input type="datetime-local" id="transactionDateTime" name="transactionDateTime" class="form-control">
+			</div> -->
 
 			<button type="submit" class="btn btn-primary">Create Transaction</button>
 		</form>
@@ -47,8 +57,10 @@
 					<th>Transaction ID</th>
 					<th>From Account ID</th>
 					<th>To Account ID</th>
-					<th>Amount</th>
 					<th>Transaction Type</th>
+					<th>Amount</th>	
+					<th>Comments</th>
+					<th>Transaction Date Time</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,7 +71,8 @@
 						<td>${transaction.bankTransactionToAccount.accountId}</td>
 						<td>${transaction.transactionAmount}</td>
 						<td>${transaction.transactionType}</td>
-						
+						<td>${transaction.comments}</td>
+						<td>${transaction.bankTransactionDateTime}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

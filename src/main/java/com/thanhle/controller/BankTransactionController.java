@@ -53,6 +53,7 @@ public class BankTransactionController {
 	public String createTransaction(@RequestParam Long fromAccountId, 
 									@RequestParam Long toAccountId, 
 									@RequestParam double amount, 
+									@RequestParam String comments,
 									TransactionType transactionType, 
 									RedirectAttributes redirectAttributes, 
 									Model model) {
@@ -60,7 +61,7 @@ public class BankTransactionController {
 		
 		try {
 			
-			bankTransactionService.createTransaction(fromAccountId, toAccountId, amount, transactionType);
+			bankTransactionService.createTransaction(fromAccountId, toAccountId, amount, comments, transactionType);
 			
 			// Fetch all transactions of the given accountId
 			if(!model.containsAttribute("transactions")) {
@@ -84,7 +85,6 @@ public class BankTransactionController {
 	    List<BankTransaction> transactions = bankTransactionService.findTransactionsByAccountId(fromAccountId);
 	    System.out.println("Transactions " + transactions);
 	    
-	    model.addAttribute("transactions", new BankTransaction());
 
 	    // Add the fetched transactions to the model
 	    model.addAttribute("transactions", transactions);

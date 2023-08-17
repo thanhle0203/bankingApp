@@ -23,7 +23,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	
 
 	@Override
-	public BankTransaction createTransaction(Long fromAccountId, Long toAccountId, double amount, TransactionType transactionType) {
+	public BankTransaction createTransaction(Long fromAccountId, Long toAccountId, double amount, String comments, TransactionType transactionType) {
 		Account fromAccount = null;
 		Account toAccount = null;
 		
@@ -73,6 +73,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 		transaction.setBankTransactionToAccount(toAccount);
 		transaction.setTransactionAmount(amount);
 		transaction.setTransactionType(transactionType);
+		transaction.setComments(comments);
 		transaction.setBankTransactionDateTime(LocalDateTime.now());
 		
 		return bankTransactionRepository.save(transaction);
