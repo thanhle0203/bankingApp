@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thanhle.domain.Account;
 import com.thanhle.domain.Customer;
 import com.thanhle.domain.User;
 import com.thanhle.repository.CustomerRepository;
@@ -30,9 +31,30 @@ public class CustomerServiceImpl implements CustomerService {
 		User user = customer.getUser();
 		if (user != null && user.getUserId() == null) {
 			userRepository.save(user);
+			customer.setUser(user);
+		}
+		
+		// Save or update the associated Accounts
+		List<Account> accounts = customer.getCustomerAccounts();
+		if (accounts != null) {
+			for (Account account : accounts) {
+				account.setAccountCustomer(customer);
+			}
 		}
 		
 		return customerRepository.save(customer);
+	}
+	
+	public Customer setCustomerUserByUserId(Long customerId, Long userId) {
+		Customer customer = getCustomerById(customerId);
+		User user = getUserById(userId);
+		customer.setUser(user);
+		return customerRepository.save(customer);
+	}
+
+	private User getUserById(Long userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

@@ -8,6 +8,11 @@
 </head>
 <body>
     <div class="container">
+        <!-- Including Navbar -->
+        <jsp:include page="navbar.jsp" />
+    </div>
+    
+    <div class="container">
         <h1>Create a New Branch</h1>
         <form action="/branches/save" method="post">
 

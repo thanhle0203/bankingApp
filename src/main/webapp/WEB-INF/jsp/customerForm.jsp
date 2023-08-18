@@ -8,6 +8,11 @@
 </head>
 <body>
     <div class="container">
+        <!-- Including Navbar -->
+        <jsp:include page="navbar.jsp" />
+    </div>
+    
+    <div class="container">
         <h1>Create a New Customer</h1>
         <form action="/customers/save" method="post">
             <div class="form-group">

@@ -26,6 +26,13 @@ public class AccountController {
     @Autowired
     private CustomerService customerService;
     
+    @GetMapping
+	public String getAccountForm(Model model) {
+		
+	    model.addAttribute("accounts", accountService.findAllAccounts());
+	    return "accountForm";
+	}
+    
     @PostMapping("/save/{customerId}")
 	public String saveAccount(Account account, @PathVariable Long customerId, Model model) {
     	
@@ -56,13 +63,6 @@ public class AccountController {
 	}
 	
 	
-	
-	@GetMapping("/create")
-	public String createAccountForm(Model model) {
-	    model.addAttribute("accounts", accountService.findAllAccounts());
-	    return "accountForm";
-	}
-	
 
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
@@ -75,7 +75,7 @@ public class AccountController {
         return account != null ? new ResponseEntity<>(account, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping
+    @GetMapping("/create")
     public ResponseEntity<List<Account>> getAllAccounts() {
         List<Account> accounts = accountService.findAllAccounts();
         return new ResponseEntity<>(accounts, HttpStatus.OK);

@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+    <div class="container">
+        <!-- Including Navbar -->
+        <jsp:include page="navbar.jsp" />
+    </div>
+    
     <div class="container mt-4">
         <h1>Create Account</h1>
         <form action="/accounts/save/${customer.customerId}" method="post">

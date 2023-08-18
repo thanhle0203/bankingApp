@@ -6,63 +6,69 @@
     <title>Banking App</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .hero-section {
+            background-color: #007BFF;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     
 <div class="container">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">BankingApp</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/customers">Customer</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/accounts">Account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/transactions">Transaction</a>
-                </li>
-            </ul>
+    <!-- Including Navbar -->
+    <jsp:include page="navbar.jsp" />
+    <br>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Welcome to Online Banking</h1>
+        <p>Your trusted partner for all financial needs</p>
+        <a href="/users/login">
+            <button class="btn btn-light mt-3">Get Started</button>
+        </a>
+        
+    </div>
+
+    <!-- Features Section -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure Transactions</h3>
+                <p>We ensure all your transactions are encrypted and secure.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Banking</h3>
+                <p>Manage your finances on the go with our mobile banking services.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Our support team is always ready to help, anytime, anywhere.</p>
+            </div>
         </div>
-    </nav>
-
-    <!-- Login Component -->
-    <div class="mt-5">
-        <h3>Login</h3>
-        <form action="loginEndpoint" method="post">
-            <!-- Hidden roleId input -->
-            <input type="hidden" name="roleId" value="2">
-            <!-- <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div> -->
-            <div>
-                <label for="userName">Username</label>
-                <input type="text" class="form-control" id="userName" name="userName" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
     </div>
 
-    <!-- Signup Component -->
-    <div class="mt-5">
-        <h4>New to BankingApp? <a href="/users/signup">Sign Up Now</a></h4>
-    </div>
 </div>
 
-<!-- Bootstrap JS and jQuery -->
+<!-- Bootstrap JS, jQuery, and FontAwesome -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 </body>
 </html>

@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+    <!-- Including Navbar -->
+    <jsp:include page="navbar.jsp" />
+    <br>
+    
     <div class="container mt-5">
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
