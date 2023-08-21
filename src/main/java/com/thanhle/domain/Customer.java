@@ -43,8 +43,6 @@ public class Customer {
 	@JsonBackReference
 	private User user;
 
-
-
 	
 
 }

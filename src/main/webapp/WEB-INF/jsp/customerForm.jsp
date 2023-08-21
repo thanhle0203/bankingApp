@@ -11,7 +11,7 @@
         <!-- Including Navbar -->
         <jsp:include page="navbar.jsp" />
     </div>
-    
+
     <div class="container">
         <h1>Create a New Customer</h1>
         <form action="/customers/save" method="post">
@@ -61,6 +61,11 @@
                 <input type="text" name="customerAddress.zipCode" id="zipCode" class="form-control" required>
             </div>
 
+            <div class="form-group">
+                <label for="userId">User ID</label>
+                <input type="text" name="user.userId" id="userId" value="${user.userId}" class="form-control" readonly>
+            </div>
+
             <input type="submit" value="Create Customer" class="btn btn-primary">
         </form>
 
@@ -75,6 +80,7 @@
                     <th>Mobile Number</th>      
                     <th>Address</th>
                     <th>Real ID</th>
+                    <th>UserId</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,6 +93,7 @@
                         <td>${customer.customerMobileNum}</td>
                         <td>${customer.customerAddress.addressLine1}, ${customer.customerAddress.addressLine2}, ${customer.customerAddress.city}, ${customer.customerAddress.state}, ${customer.customerAddress.county}, ${customer.customerAddress.zipCode}</td>
                         <td>${customer.realId}</td>
+                        <td>${customer.user.userId}</td>
                     </tr>
                 </c:forEach>
             </tbody>

@@ -30,8 +30,9 @@ public class User {
 			joinColumns=@JoinColumn(name="user_id"), 
 			inverseJoinColumns=@JoinColumn(name="role_id")
 			)
-	//@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	
 	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
+	//@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	//@JsonManagedReference
 	private List<Role> roles = new ArrayList<>();
 

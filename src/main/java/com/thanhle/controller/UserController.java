@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ import com.thanhle.service.CustomerService;
 import com.thanhle.service.RoleService;
 import com.thanhle.service.UserService;
 
-//@RestController
+@RestController
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -35,28 +36,61 @@ public class UserController {
 	@Autowired
 	private RoleService roleService;
 	
-
-	/*
+	
+	// Create a new user
+	@PostMapping
+	public ResponseEntity<User> createUser(@RequestBody User user, @RequestParam(name="role", defaultValue="USER") String role) {
+		try {
+			User savedUser = userService.saveUser(user, role);
+			return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+			
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	// Get a specific user by ID
+	@GetMapping("/{userId}")
+	public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+		try {
+			User user = userService.getUserById(userId);
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	// Update a user by ID
+	@PutMapping("/{userId}")
+	public ResponseEntity<User> updatedUser(@PathVariable Long userId, @RequestBody User userUpdates) {
+		try {
+			User updatedUser = userService.updateUser(userId, userUpdates);
+			return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
+	// Delete a user by Id
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<Void> deletedUser(@PathVariable Long userId) {
+		try {
+			userService.deleteUser(userId);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	// Get all users
 	@GetMapping
 	public List<User> getAllUsers() {
 		return userService.getAllUsers();
 	}
-	*/
 	
-	@GetMapping("/{userId}")
-	public User getUserById(@PathVariable Long userId) {
-		return userService.getUserById(userId);
-	}
-	
-	@PutMapping("/{userId}")
-	public User updateUser(@PathVariable Long userId, @RequestBody User user) {
-		return userService.updateUser(userId, user);
-	}
-	
-	@DeleteMapping("/{userId}")
-	public void deleteUser(@PathVariable Long userId) {
-		userService.deleteUser(userId);
-	}
+	/*
+
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String loginPage() {
@@ -70,20 +104,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET) 
-	public String signupPage() {
+	public String signupPage(Model model) {
+		
 		return "signupForm";
 	}
 	
-	/*
-	@PostMapping("/save")
-	  public String saveUser(User user, Model model) {
-	        userService.saveUser(user);
-	        model.addAttribute("message", "User saved successfully");
-	        model.addAttribute("users", userRepository.findAll());
-	        return "signupForm";
-	          
-	}
-	*/
+
 	
 	@PostMapping("/save")
 	public String saveUser(User user, @RequestParam String role, Model model) {
@@ -99,6 +125,8 @@ public class UserController {
 	    model.addAttribute("users", userService.getAllUsers());
 	    return "signupForm";
 	}
+	
+	*/
 
 
 	

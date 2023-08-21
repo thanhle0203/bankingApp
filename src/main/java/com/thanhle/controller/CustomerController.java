@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.*;
 
 import com.thanhle.domain.Customer;
 import com.thanhle.service.CustomerService;
+import com.thanhle.service.UserService;
 
 //@RestController
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
 	@Autowired CustomerService customerService;
+	@Autowired UserService userService;
 	
 	@PostMapping("/save")
 	public String saveCustomer(Customer customer, Model model) {
@@ -26,6 +28,9 @@ public class CustomerController {
 	@GetMapping
 	public String getCustomer(Customer customer, Model model) {
 		model.addAttribute("customers", customerService.getAllCustomers());
+		
+		model.addAttribute("users", userService.getAllUsers());
+		
 	    return "customerForm";
 	}
 	
