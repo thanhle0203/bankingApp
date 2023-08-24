@@ -20,7 +20,7 @@ public class Role {
 	
 	private String roleName;
 	
-	@ManyToMany(mappedBy="roles")
+	@ManyToMany(mappedBy="roles", fetch=FetchType.EAGER)
 	//@JsonBackReference
 	private List<User> users = new ArrayList<>();
 }

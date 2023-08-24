@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@RestController
-@Controller
+@RestController
+//@Controller
 @RequestMapping("/branches")
 public class BranchController {
 
     @Autowired
     private BranchService branchService;
 
-    @GetMapping()
+    @GetMapping("/createBranch")
 	public String branchForm(Model model) {
     	//model.addAttribute("branch", new Branch());
     	model.addAttribute("branches", branchService.findAll());
@@ -41,9 +41,7 @@ public class BranchController {
     }
     
     
-    
-    /*
-    @PostMapping("/create-branch")
+    @PostMapping()
     public ResponseEntity<Branch> createBranch(@RequestBody Branch branch) {
         Branch createdBranch = branchService.save(branch);
         return new ResponseEntity<>(createdBranch, HttpStatus.CREATED);
@@ -73,5 +71,5 @@ public class BranchController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    */
+    
 }

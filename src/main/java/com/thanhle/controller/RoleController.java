@@ -9,7 +9,7 @@ import com.thanhle.domain.Role;
 import com.thanhle.service.RoleService;
 
 @RestController
-@RequestMapping("/api/roles")
+@RequestMapping("/roles")
 public class RoleController {
 	
 	@Autowired
