@@ -64,41 +64,52 @@ public class AccountController {
 	
 	
 
+	// Create a new account
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
-        return new ResponseEntity<>(accountService.createAccount(account), HttpStatus.CREATED);
+        return ResponseEntity.ok(accountService.createAccount(account));
     }
 
-    @GetMapping("/{accountId}")
-    public ResponseEntity<Account> getAccount(@PathVariable Long accountId) {
-        Account account = accountService.findAccountById(accountId);
-        return account != null ? new ResponseEntity<>(account, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping("/create")
+    // Get all accounts
+    @GetMapping
     public ResponseEntity<List<Account>> getAllAccounts() {
-        List<Account> accounts = accountService.findAllAccounts();
-        return new ResponseEntity<>(accounts, HttpStatus.OK);
+        return ResponseEntity.ok(accountService.findAllAccounts());
     }
 
-    @PutMapping("/{accountId}")
-    public ResponseEntity<Account> updateAccount(@PathVariable Long accountId, @RequestBody Account account) {
-        account.setAccountId(accountId);
-        Account updatedAccount = accountService.updateAccount(account);
-        return new ResponseEntity<>(updatedAccount, HttpStatus.OK);
+    // Get account by id
+    @GetMapping("/{id}")
+    public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
+        Account account = accountService.findAccountById(id);
+        if (account != null) {
+            return ResponseEntity.ok(account);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @DeleteMapping("/{accountId}")
-    public ResponseEntity<Void> deleteAccount(@PathVariable Long accountId) {
-        accountService.deleteAccount(accountId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    // Update an account
+    @PutMapping("/{id}")
+    public ResponseEntity<Account> updateAccount(@PathVariable Long id, @RequestBody Account updatedAccount) {
+        updatedAccount.setAccountId(id);  // Ensure ID matches
+        return ResponseEntity.ok(accountService.updateAccount(updatedAccount));
     }
 
-    @GetMapping("/type")
-    public ResponseEntity<List<Account>> findByAccountType(@RequestParam AccountType type) {
-        List<Account> accounts = accountService.findByAccountType(type);
-        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    // Delete an account
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
+        accountService.deleteAccount(id);
+        return ResponseEntity.noContent().build();
     }
 
-    // Additional endpoints as required...
+    // Get accounts by type
+    @GetMapping("/type/{type}")
+    public ResponseEntity<List<Account>> getAccountsByType(@PathVariable AccountType type) {
+        return ResponseEntity.ok(accountService.findByAccountType(type));
+    }
+
+    // Get accounts by customer id
+    @GetMapping("/customer/{customerId}")
+    public ResponseEntity<List<Account>> getAccountsByCustomerId(@PathVariable Long customerId) {
+        return ResponseEntity.ok(accountService.findAccountsByCustomerId(customerId));
+    }
 }
