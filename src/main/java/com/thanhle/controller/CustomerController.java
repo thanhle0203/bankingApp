@@ -9,13 +9,16 @@ import com.thanhle.domain.Customer;
 import com.thanhle.service.CustomerService;
 import com.thanhle.service.UserService;
 
-//@RestController
-@Controller
+@RestController
+//@Controller
 @RequestMapping("/customers")
 public class CustomerController {
 	@Autowired CustomerService customerService;
 	@Autowired UserService userService;
 	
+	
+	
+	/*
 	@PostMapping("/save")
 	public String saveCustomer(Customer customer, Model model) {
 	    Customer savedCustomer = customerService.saveCustomer(customer);
@@ -44,29 +47,9 @@ public class CustomerController {
 	    // Return the name of the JSP that contains the account creation form
 	    return "accountForm";
 	}
-
-	
-	/*
-	@PostMapping
-	public Customer createCustomer(@RequestBody Customer customer) {
-		return customerService.saveCustomer(customer);
-	}
-	
-	@GetMapping("/{customerId}")
-	public Customer getCustomerById(@PathVariable Long customerId) {
-		return customerService.getCustomerById(customerId);
-	}
-	
-	@PutMapping("/{customerId}") 
-	public Customer updateCustomer(@PathVariable Long customerId, @RequestBody Customer newCustomer) {
-		return customerService.updateCustomer(customerId, newCustomer);
-	}
-	
-	@DeleteMapping("/{customerId}")
-	public void deleteCustomer(@PathVariable Long customerId) {
-		customerService.deleteCustomer(customerId);
-	}
 	*/
+
+
 	
 	
 }

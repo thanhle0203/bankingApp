@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@RestController
-@Controller
+@RestController
+//@Controller
 @RequestMapping("/accounts")
 public class AccountController {
 
@@ -71,7 +71,7 @@ public class AccountController {
     }
 
     // Get all accounts
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<List<Account>> getAllAccounts() {
         return ResponseEntity.ok(accountService.findAllAccounts());
     }
