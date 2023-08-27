@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.*;
@@ -41,6 +42,8 @@ public class Account {
 	
 	@JoinColumn(name="customerId")
 	@ManyToOne
+	//@JsonManagedReference
+	@JsonBackReference
 	private Customer accountCustomer;
 	
 	@JsonIgnore

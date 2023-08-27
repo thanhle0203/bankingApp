@@ -11,5 +11,7 @@ public interface CustomerService {
 	void deleteCustomer(Long customerId);
 	public List<Customer> getAllCustomers();
 	Customer findById(Long customerId);
+	Customer setCustomerUserByUserId(Long customerId, Long userId);
+	boolean existsById(Long customerId);
 	
 }

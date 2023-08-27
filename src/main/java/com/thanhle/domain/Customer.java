@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 @JsonIdentityInfo(
@@ -20,6 +22,7 @@ public class Customer {
 	@Id
 	private Long customerId;
 	
+	@NotBlank(message = "Customer name is required.")
 	private String customerName;
 	
 	private String customerGender;
@@ -27,6 +30,7 @@ public class Customer {
 	@DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
 	private LocalDate customerDob;
 	
+	@Pattern(regexp = "^[0-9]{10}$", message = "Mobile number should be 10 digits.")
 	private String customerMobileNum;
 	
 	@Embedded
@@ -34,8 +38,10 @@ public class Customer {
 	
 	private String realId;
 	
-	@OneToMany(mappedBy="accountCustomer")
-	@JsonBackReference
+	@JsonIgnore
+	@OneToMany(mappedBy="accountCustomer", fetch = FetchType.LAZY)
+	//@JsonBackReference
+	@JsonManagedReference
 	private List<Account> customerAccounts;
 	
 	@JoinColumn(name="userId")

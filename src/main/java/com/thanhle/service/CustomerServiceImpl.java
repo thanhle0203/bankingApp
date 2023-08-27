@@ -107,6 +107,15 @@ public class CustomerServiceImpl implements CustomerService {
 			return null;
 		}
 	}
+
+	@Override
+	public boolean existsById(Long customerId) {
+		Optional<Customer> existingCustomer = customerRepository.findById(customerId);
+		if (existingCustomer.isPresent()) {
+			return true;
+		}
+		return false;
+	}
 	
 	
 
