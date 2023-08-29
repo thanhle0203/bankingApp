@@ -24,6 +24,26 @@ public class BankTransactionController {
 	@Autowired
 	private AccountService accountService;
 	
+	// Create new transaction
+	@PostMapping
+	public ResponseEntity<BankTransaction> createTransaction (
+			@RequestParam(required = false) Long fromAccountId,
+			@RequestParam(required = false) Long toAccountId,
+			@RequestParam double amount,
+			@RequestParam String comments,
+			@RequestParam TransactionType transactionType
+		) {
+		try {
+			BankTransaction transaction = bankTransactionService.createTransaction(fromAccountId, toAccountId, amount, comments, transactionType);
+			return ResponseEntity.ok(transaction);
+			
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.badRequest().body(null);
+		}
+		
+	}
+	
+	 
 	@Autowired
 	private BankTransactionService bankTransactionService;
 	
