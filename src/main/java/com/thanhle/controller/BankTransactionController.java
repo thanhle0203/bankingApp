@@ -18,11 +18,16 @@ import com.thanhle.service.BankTransactionService;
 
 import jakarta.validation.Valid;
 
-@Controller
+@RestController
+//@Controller
 @RequestMapping("/bankTransactions")
 public class BankTransactionController {
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private BankTransactionService bankTransactionService;
+	
 	
 	// Create new transaction
 	@PostMapping
@@ -44,8 +49,46 @@ public class BankTransactionController {
 	}
 	
 	 
-	@Autowired
-	private BankTransactionService bankTransactionService;
+	// Get transaction by ID
+	@GetMapping("/{transactionId}")
+	public ResponseEntity<BankTransaction> getTransactionById(@PathVariable Long transactionId) {
+		BankTransaction transaction = bankTransactionService.findTransactionById(transactionId);
+		if (transaction != null) {
+			return ResponseEntity.ok(transaction);
+		}
+		else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	// Get all transactions
+	@GetMapping
+	public List<BankTransaction> getAllTransactions() {
+		return bankTransactionService.findAllTransactions();
+	}
+	
+	// Update transaction
+	@PutMapping
+	public ResponseEntity<BankTransaction> updateTransaction(@PathVariable Long transactionId, @RequestBody BankTransaction transaction) {
+		if (!transactionId.equals(transaction.getBankTransactionId())) {
+			return ResponseEntity.badRequest().build();
+		}
+		
+		return ResponseEntity.ok(bankTransactionService.updateTransaction(transaction));
+	}
+	
+	// Delete transaction 
+	@DeleteMapping("/{transactionId}")
+	public ResponseEntity<Void> deleteTransaction(@PathVariable Long transactionId) {
+		bankTransactionService.deleteTransaction(transactionId);
+		return ResponseEntity.noContent().build();
+	}
+	
+	// Get transacrions by account ID
+	@GetMapping("/account/{accountId}")
+	public List<BankTransaction> getTransactionsByAccountId(@PathVariable Long accountId) {
+		return bankTransactionService.findTransactionsByAccountId(accountId);
+	}
 	
 	@GetMapping("/transactions")
 	public String showTransactionForm(Model model) {
@@ -54,20 +97,7 @@ public class BankTransactionController {
 		return "bankTransactionForm";
 	}
 	
-	/*
-	@GetMapping("/transaction/{accountId}")
-	public String showTransactionForm(@PathVariable Long accountId, Model model) {
-		Account account = accountService.findAccountById(accountId);
-		if (account == null) {
-			return "error";
-		}
-		
-		model.addAttribute("account", account);
-		model.addAttribute("transaction", new BankTransaction());
-		return "bankTransactionForm";
-	}
-	*/
-	
+
 	
 	@PostMapping("/transaction")
 	public String createTransaction(@RequestParam Long fromAccountId, 
