@@ -90,6 +90,8 @@ public class BankTransactionController {
 		return bankTransactionService.findTransactionsByAccountId(accountId);
 	}
 	
+	/*
+	
 	@GetMapping("/transactions")
 	public String showTransactionForm(Model model) {
 		model.addAttribute("transaction", new BankTransaction());
@@ -158,7 +160,7 @@ public class BankTransactionController {
 	    return "bankTransactionForm";
 	}
 	
-
+	*/
 
 
 }
