@@ -12,7 +12,7 @@
     <!-- Including Navbar -->
     <jsp:include page="navbar.jsp" />
     <br>
-    
+
     <div class="container mt-5">
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
@@ -48,7 +48,10 @@
                 <input type="radio" id="admin" name="role" value="ADMIN">
                 <label for="admin">Admin</label><br>
                 <input type="radio" id="user" name="role" value="USER">
-                <label for="user">User</label>
+                <label for="user">HR</label>
+                <input type="radio" id="HR" name="role" value="HR">
+                <label for="user">MANAGER</label>
+                <input type="radio" id="MNG" name="role" value="MNG"> 
             </div>
             <input type="submit" value="Sign Up" class="btn btn-primary">
         </form>
